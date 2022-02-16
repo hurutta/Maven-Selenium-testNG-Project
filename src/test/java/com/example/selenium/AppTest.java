@@ -10,7 +10,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.AfterTest;
 
 public class AppTest 
 {
@@ -34,13 +34,6 @@ public class AppTest
         WebElement searchIcon = driver.findElement(By.className("search-box__button--1oH7"));
         searchIcon.click();
 
-        WebElement location = driver.findElement(By.xpath("//div[@class='ant-col-4 ant-col-pull-20 c2cfh3']//div[2]//div[2]//div[1]//div[1]//label[1]//span[1]//input[1]"));
-        location.click();
-        WebElement dropdown = driver.findElement(By.className("ant-select-arrow"));
-        dropdown.click();
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        WebElement lowToHigh = driver.findElement(By.xpath("//div[normalize-space()='Price low to high']"));
-        lowToHigh.click();
 
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("window.scrollBy(0,-350)", "");
@@ -55,41 +48,37 @@ public class AppTest
         
         WebElement priceRange = driver.findElement(By.xpath("//button[@class='ant-btn c3R9mX ant-btn-primary ant-btn-icon-only']"));
         priceRange.click();
+
+
+
+        WebElement location = driver.findElement(By.xpath("//div[@class='ant-col-4 ant-col-pull-20 c2cfh3']//div[2]//div[2]//div[1]//div[1]//label[1]//span[1]//input[1]"));
+        location.click();
+        WebElement dropdown = driver.findElement(By.className("ant-select-arrow"));
+        dropdown.click();
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        WebElement lowToHigh = driver.findElement(By.xpath("//div[normalize-space()='Price low to high']"));
+        lowToHigh.click();
+
+        JavascriptExecutor js2 = (JavascriptExecutor) driver;
+        js2.executeScript("window.scrollBy(0,-350)", "");
         
     }
 
 
 
-    /*
-    @AfterMethod
-    public void afterMethod(ITestResult result)
+    @Test
+    public void placeOrder()
     {
-        if(result.getStatus()==ITestResult.SUCCESS)
-        {
-            String methodName = result.getMethod().getMethodName();
-            String logText = "TEST CASE : " + methodName + " PASSED";
-            Markup m = MarkupHelper.createLabel(logText, ExtentColor.GREEN);
-            logger.log(Status.PASS,m);
-        }else
-        if(result.getStatus()==ITestResult.FAILURE)
-        {
-            String methodName = result.getMethod().getMethodName();
-            String logText = "TEST CASE : " + methodName + " FAILED";
-            Markup m = MarkupHelper.createLabel(logText, ExtentColor.RED);
-            logger.log(Status.FAIL,m);
-        }
+        
+    }
+
+
+
+    @AfterTest
+    public void afterMethod()
+    {
         driver.quit();
     }
 
-
-
-
-    Rigorous Test :-)
-    @Test
-    public void shouldAnswerWithTrue()
-    {
-        assertTrue( true );
-    }
-     */
     
 }
